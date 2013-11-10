@@ -5,6 +5,20 @@ use Amon2::Lite;
 
 use Digest::MD5 qw(md5_hex);
 
+use DBIx::Sunny;
+sub db {
+    my $self = shift;
+    my $db_name = 'mobacon_perl';
+    my $host    = '';
+    my $user    = 'root';
+    my $pass    = '';
+    return DBIx::Sunny->connect(
+        "dbi:mysql:$db_name;host=$host",
+        $user,
+        $pass,
+    );
+}
+
 post '/admin/reset' => sub {
     my ($c, ) = @_;
     $c->db->query(q{TRUNCATE TABLE `user`});
@@ -25,7 +39,7 @@ post '/user/register' => sub {
 };
 
 __PACKAGE__->load_plugins(
-    'Web:JSON';
+    'Web::JSON',
 );
 __PACKAGE__->to_app;
 
