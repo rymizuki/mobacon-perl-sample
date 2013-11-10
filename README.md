@@ -40,6 +40,16 @@ $ cd mobacon-perl-sample
 $ carton install
 ```
 
+## initialize databse
+
+please set your configs.
+
+```
+$ mysqladmin -u root drop mobacon_perl_sample -f;
+$ mysqladmin -u root create mobacon_perl_sample;
+$ mysql -u root mobacon_perl_sample < db/schema.sql
+```
+
 ## Run apps
 
 ```
